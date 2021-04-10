@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/tasks_board.css') }}">
+    <title>Tasks Board</title>
+</head>
+<body>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+            <div class="masthead clearfix">
+                <div class="inner">
+                <h3 class="masthead-brand">Diary</h3>
+                <nav>
+                    <ul class="nav masthead-nav">
+                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                    <li><a href="{{ url_for('users.user', username=current_user.username) }}" >Account</a></li>
+                    <li><a href="{{ url_for('todos.todo', username=current_user.username) }}" >Todo List</a></li>
+                    <li><a href="{{ url_for('users.login')}}">Login</a>
+                    <li><a href="{{ url_for('users.logout')}}">Logout</a>
+                    </ul>
+                </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class='container'>
+    <h2>Tasks for today</h2>
+    <h3>Add task</h3>
+    <p>
+    <form action="{{ url_for('todos.add', username=current_user.username) }}" method="POST">
+        <input class='new-task' type="text" name="todoitem" value="" placeholder="Tasks for today">
+        <input type="submit" value="Add task">
+    </form>
+    </p>
+        <h2>Todo</h2>
+        <ul class="incomplete-tasks">
+            {% for todo in incomplete %}
+            <li><label>{{ todo.text}}</label>
+            <a href="{{ url_for('todos.complete', username=current_user.username, id=todo.id,)}}"><button class='edit'>Done</button></a>
+            <a href="{{ url_for('todos.delete', username=current_user.username, id=todo.id,)}}"><button class='delete'>Delete</button></a></li>
+            {% endfor %} 
+        </ul>
+        <h3>Completed</h3>
+        <ul class="completed-tasks"></ul>
+           {% for todo in complete %}
+           <li><label><s>{{ todo.text }}</s></label>
+            <a class='delete' href="{{ url_for('todos.delete', username=current_user.username, id=todo.id)}}"><button class='delete'>Delete</button></a></li>
+            {% endfor %} 
+        </ul>
+    </div>
+
+</body>
+</html>

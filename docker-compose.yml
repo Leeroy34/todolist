@@ -1,0 +1,29 @@
+version: '3.8'
+
+services: 
+  db:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5000
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_PASSWORD=1997
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=todolist
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    restart: always
+  app:
+    build: . 
+    container_name: application
+    ports: 
+      - 5000:5000
+    environment: 
+      SQLALCHEMY_DATABASE_URI: 'postgresql+psycopg2://postgres:1997@db:5432/todolist'
+    restart: always
+    volumes:
+      - ./todolist:/usr/src/app/app
+      - ./migrations:/usr/src/app/migrations
+    links:
+      - db

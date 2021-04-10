@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/main.css') }}">
+    <title>
+        {% block title %}
+
+        {% endblock %} | Tasks board
+    </title>
+</head>
+<body>
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+        <div class="masthead clearfix">
+            <div class="inner">
+            <h3 class="masthead-brand">Diary</h3>
+            <nav>
+                <ul class="nav masthead-nav">
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('users.user', username=current_user.username) }}" >Account</a></li>
+                <li><a href="{{ url_for('todos.todo', username=current_user.username) }}" >Todo List</a></li>
+                <li><a href="{{ url_for('users.login')}}">Login</a>
+                <li><a href="{{ url_for('users.logout')}}">Logout</a>
+                </ul>
+            </nav>
+            </div>
+        </div>
+
+    </div>
+    {% block content %}
+
+    {% endblock %}
+</div>
+</div>
+
+
+
+</body>
+</html>

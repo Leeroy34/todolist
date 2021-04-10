@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Profile
+{% endblock %} 
+
+{% block content %}
+
+    <h2>Edit Profile</h2>
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+          <form method="POST" action="" enctype="multipart/form-data">
+              {{ form.hidden_tag() }}
+              <p class="text-secondary">Account information</p>
+                      {{ form.username.label(class="form-control-label") }}
+  
+                      {% if form.username.errors %}
+                          {{ form.username(class="form-control form-control-lg is-invalid ") }}
+                              {% for error in form.username.errors %}
+                                  <span>{{ error }}</span>
+                              {% endfor %}
+                      {% else %}
+                          {{ form.username(class="form-control form-control-lg") }}
+                      {% endif %}
+                      {{ form.about_me.label(class="form-control-label") }}
+                      {% if form.about_me.errors %}
+                          {{ form.about_me(class="form-control form-control-lg is-invalid") }}
+                              {% for error in form.about_me.errors %}
+                                  <span>{{ error }}</span>
+                              {% endfor %}
+                      {% else %}
+                          {{ form.about_me(class="form-control form-control-lg") }}
+                      {% endif %}
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                      {{ form.picture.label() }}
+                      {{ form.picture(class="form-control-file") }}
+                      {% if form.picture.errors %}
+                          {% for error in form.picture.errors %}
+                              <span class="text-danger">{{ error }}</span></br>
+                          {% endfor %}
+                      {% endif %}
+
+                  {{ form.submit(class="btn btn-lg btn-default") }}
+          </form>
+      </div>
+    {% endblock %}

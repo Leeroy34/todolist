@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Index Page
+{% endblock %} |
+
+{% block content %}
+
+        <div class="inner cover">
+            <h1 class="cover-heading">Make time your friend, not your enemy</h1>
+            <p class="lead">Complete your task list!</p>
+            <p class="lead">
+              <a href="{{ url_for('todos.todo', username=current_user.username) }}" class="btn btn-lg btn-default">Complete</a>
+            </p>
+          </div>
+
+
+{% endblock %}

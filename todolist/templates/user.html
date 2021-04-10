@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock %} 
+
+{% block content %}
+<div class="container">
+    <div class="row profile">
+		
+			
+				<div class="profile-userpic">
+                    <img  src="{{ image_file }}" alt="profile image">
+                </div>
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            {{ current_user.username }}
+                        </div>
+                        <div class="profile-usertitle-job">
+                            {{ current_user.email }}
+                        </div>
+                    </div>
+                <div class="profile-usermenu">
+					<ul class="nav">
+						<li class="active">
+							<a href="{{ url_for('users.edit_profile') }}">
+                            <i class="glyphicon glyphicon-user"></i>
+							Account Settings</a>
+						</li>
+                        <li>
+							<a href="{{ url_for('todos.todo', username=current_user.username) }}">
+							<i class="glyphicon glyphicon-ok"></i>
+							Tasks </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                
+                    <div class="profile-content">
+                        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+                        {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+                        {% if user == current_user %}
+                        <p></p>
+                        {% endif %}
+                    </div>
+		        </div>
+            </div>
+    </div>
+</div>
+
+    {% endblock %}
